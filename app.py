@@ -9,9 +9,9 @@ import time
 import os
 from bs4 import BeautifulSoup
 from splinter import Browser
-from selenium import webdriver
-executable_path = {"executable_path": "C://python_chrome_driver//drivers//"}
-browser = Browser("chrome", **executable_path, headless=False)
+executable_path = {'executable_path':'</path/to/chrome>'}
+browser = Browser('chrome', headless=True)
+url_nasa_mars_news = "https://mars.nasa.gov/news/"
 print("Importing dependencies for scraper...done")# ====================================================================
 print("====================================================================")
 
@@ -76,6 +76,12 @@ print(featured_image_url)
 print("Now downloading featured image")
 import requests
 import shutil
+
+import os, IPython
+os.environ['PYTHONSTARTUP'] = ''  # Prevent running this again
+IPython.start_ipython()
+raise SystemExit
+
 response = requests.get(img_url, stream=True)
 with open('img.jpg', 'wb') as out_file:
     shutil.copyfileobj(response.raw, out_file)
@@ -83,7 +89,7 @@ with open('img.jpg', 'wb') as out_file:
 time.sleep(3)
 print("Now downloading featured image...done")
 print("Now previewing featured image")
-from IPython.display import Image
+from IPython.display import display, Image
 Image(url='img.jpg')
 # wait a few seconds to allow your computer to show the image
 time.sleep(3)
